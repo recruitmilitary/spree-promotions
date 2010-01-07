@@ -47,8 +47,10 @@ class PromotionsExtension < Spree::Extension
       end
     end
 
-    [ProductsController, Spree::BaseController].each{|c| c.helper 'promotions'}
-      
+    Spree::BaseController.class_eval do
+      helper PromotionsHelper
+    end
+
     Rails.cache.silence!
 
     # make your helper avaliable in all views
